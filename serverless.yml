@@ -50,14 +50,14 @@ provider:
   profile: ${self:custom.profiles.${opt:stage, self:provider.stage}}
   deploymentBucket: ${self:custom.deploymentBucket.${opt:stage, self:provider.stage}}
   runtime: nodejs16.x
-  region: ${self:custom.regions.${opt:stage, self:provider.stage}, 'us-west-2'}
+  region: ${self:custom.regions.${opt:stage, self:provider.stage}, 'eu-central-1'}
   stage: ${opt:stage, 'dev1'}
   deploymentPrefix: serverless
   timeout: 60
-  versionFunctions: false # optional, default is true
+  versionFunctions: false
   tracing:
-    lambda: true #opt
-  memorySize: 512 # optional, in MB, default is 1024
+    lambda: true
+  memorySize: 512
   environment:
     NODE_ENV: ${self:provider.stage}
     SHA: ${opt:SHA, 'unknown'}
