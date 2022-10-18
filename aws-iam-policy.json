@@ -1,0 +1,194 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:CreateFunction",
+        "logs:DescribeLogGroups",
+        "lambda:List*",
+        "logs:DescribeLogStreams",
+        "lambda:Get*",
+        "iam:ListRoles",
+        "lambda:CreateEventSourceMapping",
+        "logs:FilterLogEvents",
+        "cloudformation:List*",
+        "cloudwatch:GetMetricStatistics",
+        "cloudformation:ValidateTemplate",
+        "cloudformation:Get*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:DeleteMessage",
+        "s3:PutAccelerateConfiguration",
+        "sns:DeleteTopic",
+        "dynamodb:DeleteItem",
+        "s3:ListBucketVersions",
+        "s3:CreateBucket",
+        "s3:ListBucket",
+        "s3:PutEncryptionConfiguration",
+        "apigateway:DELETE",
+        "s3:GetEncryptionConfiguration",
+        "iam:PassRole",
+        "logs:CreateLogStream",
+        "sns:Publish",
+        "apigateway:PATCH",
+        "dynamodb:GetItem",
+        "cloudformation:UpdateStack",
+        "sns:Subscribe",
+        "lambda:DeleteFunction",
+        "apigateway:GET",
+        "s3:DeleteBucket",
+        "sns:GetTopicAttributes",
+        "dynamodb:PutItem",
+        "apigateway:PUT",
+        "lambda:InvokeFunction",
+        "logs:DeleteLogGroup",
+        "lambda:Update*",
+        "sns:CreateTopic",
+        "sqs:SendMessage",
+        "dynamodb:Scan",
+        "dynamodb:Query",
+        "dynamodb:UpdateItem",
+        "sqs:GetQueueAttributes",
+        "events:Delete*",
+        "lambda:AddPermission",
+        "cloudformation:CreateStack",
+        "cloudformation:DeleteStack",
+        "sqs:DeleteQueue",
+        "s3:PutBucketPolicy",
+        "lambda:PublishVersion",
+        "apigateway:POST",
+        "sqs:CreateQueue",
+        "lambda:RemovePermission",
+        "s3:GetBucketLocation",
+        "lambda:CreateAlias"
+      ],
+      "Resource": [
+        "arn:aws:sns:eu-central-1:934303992704:aws-serverless-basic*",
+        "arn:aws:cloudformation:eu-central-1:*:stack/aws-serverless-basic-*/*",
+        "arn:aws:apigateway:*::/restapis*",
+        "arn:aws:apigateway:*::/apikeys*",
+        "arn:aws:apigateway:*::/usageplans*",
+        "arn:aws:dynamodb:eu-central-1:*:table/aws-serverless-basic-*-employees",
+        "arn:aws:iam::*:role/*",
+        "arn:aws:events:*:*:rule/aws-serverless-basic-*-eu-central-1",
+        "arn:aws:lambda:eu-central-1:*:function:aws-serverless-basic-*-*",
+        "arn:aws:logs:eu-central-1:*:*",
+        "arn:aws:sqs:eu-central-1:*:aws-serverless-basic*",
+        "arn:aws:s3:::aws-serverless-basic*serverlessdeploy*",
+        "arn:aws:s3:::aws-serverless-basic*"
+      ]
+    },
+    {
+      "Sid": "VisualEditor2",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "events:DescribeRule",
+        "lambda:PublishLayerVersion",
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:PutRolePolicy",
+        "logs:PutLogEvents",
+        "s3:PutObject",
+        "s3:GetObject",
+        "iam:DeleteRolePolicy",
+        "lambda:DeleteLayerVersion",
+        "s3:DeleteObject",
+        "s3:DeleteBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::aws-serverless-basic*serverlessdeploy*",
+        "arn:aws:s3:::aws-serverless-basic*",
+        "arn:aws:lambda:eu-central-1:*:layer:*-aws-serverless-basic*",
+        "arn:aws:logs:eu-central-1:*:*",
+        "arn:aws:events:eu-central-1:*:rule/aws-serverless-basic-*-*",
+        "arn:aws:iam::*:role/aws-serverless-basic-*-eu-central-1-lambdaRole"
+      ]
+    },
+    {
+      "Sid": "VisualEditor3",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "lambda:UpdateEventSourceMapping",
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:PutRolePolicy",
+        "iam:DeleteRolePolicy",
+        "s3:CreateBucket",
+        "iam:UpdateRole",
+        "lambda:DeleteEventSourceMapping"
+      ],
+      "Resource": [
+        "arn:aws:lambda:eu-central-1:*:event-source-mapping:*",
+        "arn:aws:iam::*:role/roles/default/aws-serverless-basic*",
+        "arn:aws:iam::*:role/aws-serverless-basic-*",
+        "arn:aws:s3:::*"
+      ]
+    },
+    {
+      "Sid": "VisualEditor4",
+      "Effect": "Allow",
+      "Action": "s3:SetBucketEncryption",
+      "Resource": "arn:aws:s3:::aws-serverless-basic*"
+    },
+    {
+      "Sid": "VisualEditor5",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:CreateUploadBucket",
+        "cloudformation:Describe*"
+      ],
+      "Resource": "arn:aws:cloudformation:eu-central-1:*:stack/aws-serverless-basic-*/*"
+    },
+    {
+      "Sid": "VisualEditor6",
+      "Effect": "Allow",
+      "Action": "kinesis:*",
+      "Resource": "arn:aws:kinesis:*:*:stream/aws-serverless-basic-*-eu-central-1"
+    },
+    {
+      "Sid": "VisualEditor7",
+      "Effect": "Allow",
+      "Action": "sqs:*",
+      "Resource": "arn:aws:sqs:*:*:aws-serverless-basic-*-eu-central-1"
+    },
+    {
+      "Sid": "VisualEditor8",
+      "Effect": "Allow",
+      "Action": "logs:CreateLogGroup",
+      "Resource": "arn:aws:logs:eu-central-1:*:*"
+    },
+    {
+      "Sid": "VisualEditor9",
+      "Effect": "Allow",
+      "Action": ["events:Put*", "events:Remove*"],
+      "Resource": "arn:aws:events:*:*:rule/aws-serverless-basic-*-eu-central-1"
+    },
+    {
+      "Sid": "VisualEditor10",
+      "Effect": "Allow",
+      "Action": "dynamodb:*",
+      "Resource": "arn:aws:dynamodb:*:*:table/*"
+    },
+    {
+      "Sid": "VisualEditor11",
+      "Effect": "Allow",
+      "Action": "sns:ListTopics",
+      "Resource": "arn:aws:sns:eu-central-1:*:*"
+    },
+    {
+      "Sid": "VisualEditor12",
+      "Effect": "Allow",
+      "Action": ["s3:PutBucketAcl", "s3:DeleteBucketPolicy"],
+      "Resource": "arn:aws:s3:::aws-serverless-basic*"
+    }
+  ]
+}
