@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    // "lib": [
+    //   "es6",
+    //   "DOM",
+    //   "DOM.Iterable",
+    //   "ES2020.Promise"
+    // ],
     "esModuleInterop": true,
     "moduleResolution": "node",
     "isolatedModules": true,
