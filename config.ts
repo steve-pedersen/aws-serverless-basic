@@ -1,5 +1,5 @@
 /**
- * Project configuration file. 
+ * Project configuration file.
  * Include settings like SSM, DB config, server options, etc.
  */
 import 'dotenv/config';
@@ -9,8 +9,8 @@ interface DefaultConfig {
 }
 
 interface SSMConfig {
-  region: string;
   env: string;
+  region: string;
 }
 
 const env = process.env['NODE_ENV'] ? process.env['NODE_ENV'] : 'dev1-eu-de';
@@ -19,9 +19,9 @@ const awsRegion = process.env['REGION'] ? process.env['REGION'] : 'eu-central-1'
 const config = {
   ssm: {
     region: `${awsRegion}`,
-    env: `${env}`
+    env: `${env}`,
   },
 } as DefaultConfig;
-const mergedConfig = { ...config, env }
+const mergedConfig = { ...config, env };
 
 export default mergedConfig;

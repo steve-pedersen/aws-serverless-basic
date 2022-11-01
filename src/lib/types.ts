@@ -1,11 +1,11 @@
 export interface Event {
   body: string;
-  headers: any;
+  headers: object;
   httpMethod?: string;
   path: string;
-  queryStringParameters?: any;
+  queryStringParameters?: object;
 }
 
 export interface Context {
   awsRequestId: string;
-};
+}
