@@ -1907,6 +1907,13 @@
   dependencies:
     keyv "*"
 
+"@types/lambda-log@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@types/lambda-log/-/lambda-log-2.2.1.tgz#e755876162c76d92e195be89b01ac5da56558a1f"
+  integrity sha512-+EEBg+jwPTjqRlnNRAUr2zP3HA7Vq75hSChjDpQ/wJCAGmTZQ7ZfG0m3eR4bvVmDY/z005iIkcnOBVpwkWgXgA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/lodash@^4.14.123":
   version "4.14.187"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.187.tgz#122ff0a7192115b4c1a19444ab4482caa77e2c9d"
@@ -5415,6 +5422,13 @@ kleur@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
+
+lambda-log@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lambda-log/-/lambda-log-3.1.0.tgz#dd5833dc24b2eaf665769fc801674c1b421d940e"
+  integrity sha512-dfkFw+e0CoFftuOjxkufhi1srIpa4dM3sbbe+0KtfjX11auNl7Kok+5/+07IffjXUuspKAFeiHlHUPAHJzcL3A==
+  dependencies:
+    fast-safe-stringify "^2.1.1"
 
 language-subtag-registry@~0.3.2:
   version "0.3.22"
