@@ -41,6 +41,9 @@ custom:
     dev1-eu-de: 'eu-central-1'
     dev2-eu-de: 'eu-central-1'
     stage-eu-de: 'eu-central-1'
+  esbuild:
+    bundle: true
+    minify: false
 
 provider:
   appName: aws-serverless-basic
@@ -107,6 +110,7 @@ provider:
 
 plugins:
   - serverless-offline
+  - serverless-esbuild
 
 layers:
   dependencies:
