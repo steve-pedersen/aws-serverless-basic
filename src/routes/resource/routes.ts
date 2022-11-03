@@ -25,8 +25,10 @@ export default [
       pre: [{ method: transformInput, assign: 'input' }],
     },
     handler: async (request: Request, h: any) => {
+      request.server.log('info', `GET request on /api/v1/resources`);
+
       const controller = new ResourceController(request);
-      const { code, payload } = controller.getResources();
+      const { code, payload } = await controller.getResources();
 
       return h.response(payload).code(code);
     },
@@ -60,7 +62,7 @@ export default [
     },
     handler: async (request: Request, h: any) => {
       const controller = new ResourceController(request);
-      const { code, payload } = controller.getResourceById();
+      const { code, payload } = await controller.getResourceById();
 
       return h.response(payload).code(code);
     },

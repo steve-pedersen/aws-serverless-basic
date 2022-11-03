@@ -8,6 +8,8 @@ class BaseController {
 
   corellationId: string;
 
+  logger: any;
+
   /**
    *
    * @param {any} request
