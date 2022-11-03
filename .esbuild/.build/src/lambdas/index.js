@@ -35699,7 +35699,9 @@ var initializeServer = async () => {
 // src/utils/logger.ts
 var import_lambda_log = __toESM(require_lambda_log());
 var createLogger = (metadata) => {
-  return new import_lambda_log.LambdaLog(metadata);
+  const log = new import_lambda_log.LambdaLog();
+  log.options.meta = metadata;
+  return log;
 };
 
 // src/utils/index.ts

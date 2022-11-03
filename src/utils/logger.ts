@@ -1,5 +1,8 @@
 import { LambdaLog } from 'lambda-log';
 
 export const createLogger = (metadata: any) => {
-  return new LambdaLog(metadata);
+  const log = new LambdaLog();
+  log.options.meta = metadata;
+
+  return log;
 };
