@@ -3,21 +3,30 @@
   "version": "1.0.0",
   "description": "AWS Serverless Basic Starter App",
   "scripts": {
-    "lint": "eslint .",
     "deploy": "npm run install-layer && serverless deploy",
     "build": "npm run install-layer && serverless package",
     "install-layer": "npm install --production --modules-folder dependency_layer/nodejs/node_modules",
     "test": "jest --coverage",
     "typescript": "typescript",
     "decrypt": "serverless decrypt",
-    "encrypt": "serverless encrypt"
+    "encrypt": "serverless encrypt",
+    " ": "eslint  --ignore-path .gitignore .",
+    "lint:updated": "pipe-git-updated --ext=js -- eslint --ignore-path .gitignore",
+    "prettier-check": "prettier -c --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettier-check:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier -c",
+    "prettify": "prettier --write --ignore-path .gitignore \"**/*.{css,html,js,json,md,yaml,yml}\"",
+    "prettify:updated": "pipe-git-updated --ext=css --ext=html --ext=js --ext=json --ext=md --ext=yaml --ext=yml -- prettier --write"
   },
   "jest": {
     "moduleNameMapper": {
       "^~(.*)$": "<rootDir>/src$1"
     }
   },
-  "repository": {
+  "eslintConfig": {
+    "extends": "@serverless/eslint-config/node",
+    "root": true
+  },
+  "repository": { 
     "type": "git",
     "url": "git+https://github.com/steve-pedersen/aws-serverless-basic"
   },

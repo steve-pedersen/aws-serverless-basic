@@ -1,5 +1,3 @@
-module.exports = {
-  semi: false,
-  singleQuote: true,
-  trailingComma: 'none',
-};
+'use strict';
+
+module.exports = require('@serverless/eslint-config/prettier.config');
