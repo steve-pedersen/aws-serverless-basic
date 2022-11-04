@@ -21,10 +21,11 @@ class ResourceService extends DatabaseService {
    */
   constructor(request: HapiRequest) {
     super(request);
-    this.query = request.pre?.query;
-    this.payload = request.pre?.payload;
-    this.params = request.params;
-    this.input = request.pre?.input;
+    const { params = {}, query = {}, payload = {}, input = {} } = request.pre || request || {};
+    this.query = query;
+    this.payload = payload;
+    this.params = params;
+    this.input = input;
   }
 
   parseResults(results: any[]) {

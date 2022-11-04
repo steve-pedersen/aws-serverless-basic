@@ -6,12 +6,6 @@ import { ResourceService } from '../services/resource';
  * Resource Controller
  */
 class ResourceController extends BaseController {
-  query: any;
-
-  params: any;
-
-  payload: any;
-
   service: any;
 
   /**
@@ -20,9 +14,6 @@ class ResourceController extends BaseController {
    */
   constructor(request: HapiRequest) {
     super(request);
-    this.query = request.pre?.query as {};
-    this.params = request.pre?.params;
-    this.payload = request.pre?.payload;
     this.service = new ResourceService(request);
   }
 

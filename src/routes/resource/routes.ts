@@ -34,8 +34,6 @@ export default [
       ],
     },
     handler: async (request: Request, h: any) => {
-      request.server.log('info', `GET request on /api/v1/resources`);
-
       const controller = new ResourceController(request);
       const { code, payload } = await controller.getResources();
 
