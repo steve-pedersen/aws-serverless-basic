@@ -1,5 +1,6 @@
 import * as Hapi from '@hapi/hapi';
-import { LambdaLog } from 'lambda-log';
+// import { LambdaLog } from 'lambda-log';
+import { Logger } from '@aws-lambda-powertools/logger';
 import { initializeServer } from '../utils/server';
 import { createLogger } from '../utils/logger';
 import { buildFullUrl } from '../utils';
@@ -18,18 +19,13 @@ const responseHeaders = {
 const local = process.env['IS_LOCAL'] ? 'local' : 'cloud';
 
 // cache instance variables for better performance
-let logger: LambdaLog;
+let logger: Logger;
 let server: Hapi.Server;
 
 export const handler = async (event: APIGatewayEvent, context: Context): Promise<APIGatewayProxyResult> => {
-  const { awsRequestId } = context;
   const { httpMethod, path, queryStringParameters, body, headers } = event;
-  const correlationId = headers[CORRELATION_ID];
-  logger = createLogger({ correlationId, awsRequestId });
-
-  server = server || ((await initializeServer()) as Hapi.Server);
-  // map lambda event to hapi request
-  const options = {
+  // map lambda event to Hapi request
+  const serverOptions = {
     method: httpMethod,
     url: buildFullUrl(path, queryStringParameters),
     payload: body,
@@ -37,26 +33,47 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
     validate: false,
   } as Hapi.ServerInjectOptions;
 
+  const correlationId = headers[CORRELATION_ID];
+  const { awsRequestId } = context;
+  const loggerOptions = {
+    persistentLogAttributes: {
+      awsRequestId,
+      correlationId,
+    },
+  };
+  logger = logger || createLogger(loggerOptions);
+  server = server || ((await initializeServer()) as Hapi.Server);
+
+  // handle logs with Hapi server using custom logger
+  server.events.on('log', (event: Hapi.LogEvent, tags: { [key: string]: true }) => {
+    const { data } = event;
+
+    if (tags['error']) {
+      logger.error(`Request ${event.request} error: ${data || 'unknown'}`);
+    }
+
+    if (tags['info']) {
+      logger.info(`Request ${event.request} info: ${data || 'unknown'}`);
+    }
+  });
+
   try {
-    console.log(`*** event received[${local}] ***`, { url: path });
     logger.info(`*** event received[${local}] ***`, { url: path });
 
-    const { statusCode, result } = await server.inject(options);
+    const { statusCode, result } = await server.inject(serverOptions);
     const responseBody = JSON.stringify(result);
     responseHeaders[CORRELATION_ID] = correlationId || '';
 
     return { headers: responseHeaders, body: responseBody, statusCode };
   } catch (err) {
     const { message } = err as Error;
-    console.log(`Error: ${message}`, { err });
-    logger.info(`Error: ${message}`, { err });
+    logger.error(`Error: ${message}`, { err });
 
     return {
       statusCode: 500,
       body: message || 'System Error',
     };
   } finally {
-    console.log('*** event handled ***', { url: path });
     logger.info('*** event handled ***', { url: path });
   }
 };

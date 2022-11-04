@@ -1,0 +1,15 @@
+{
+  "correlationId": "aws-serverless-basic|dev1-eu-de|2022-11-03T16:17:20.926Z|fde21dcb-379e-46f3-a7b9-5659245a1193",
+  "timestamp": "2022-11-03T16:17:20.926Z",
+  "results": [
+      {
+          "statusSet": [
+              {
+                  "errorCode": "404",
+                  "moreInfo": "No match for resourceId: 9bfed2c3-69fd-46b8-821d-2b9cc36413b8",
+                  "details": "Resource not found"
+              }
+          ]
+      }
+  ]
+}

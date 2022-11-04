@@ -1,5 +1,6 @@
 import { Request as HapiRequest } from '@hapi/hapi';
 import { BaseController } from './base';
+import { ResourceService } from '../services/resource';
 
 /**
  * Resource Controller
@@ -11,6 +12,8 @@ class ResourceController extends BaseController {
 
   payload: any;
 
+  service: any;
+
   /**
    *
    * @param {HapiRequest} request
@@ -20,26 +23,19 @@ class ResourceController extends BaseController {
     this.query = request.pre?.query as {};
     this.params = request.pre?.params;
     this.payload = request.pre?.payload;
+    this.service = new ResourceService(request);
   }
 
-  getResources() {
-    return this.response({
-      payload: {
-        query: this.query,
-        params: this.params,
-        body: this.payload,
-      },
-    });
+  async getResources() {
+    const { payload, code } = await this.service.getResources();
+
+    return this.response(payload, code);
   }
 
-  getResourceById() {
-    return this.response({
-      payload: {
-        query: this.query,
-        params: this.params,
-        body: this.payload,
-      },
-    });
+  async getResourceById() {
+    const { payload, code } = await this.service.getResourceById();
+
+    return this.response(payload, code);
   }
 }
 
