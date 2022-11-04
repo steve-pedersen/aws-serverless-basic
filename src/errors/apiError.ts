@@ -12,10 +12,6 @@ class ApiError {
 
   message: string;
 
-  responseData: any;
-
-  results: Array<any>;
-
   timestamp: string;
 
   constructor(status: number, message: string, correlationId: string, details: string = '') {
