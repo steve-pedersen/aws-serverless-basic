@@ -135,3 +135,30 @@ export interface BaseError {
   message: string;
   statusCode: number;
 }
+
+export interface ErrorResponse {
+  code: number | string;
+  payload: ErrorResponseData;
+}
+export interface ErrorResponseData {
+  correlationId: string;
+  results: Results;
+  timestamp: string;
+}
+
+export interface Results {
+  [index: number]: StatusSet;
+}
+
+export interface StatusSet {
+  statusSet: Statuses;
+}
+
+export interface Statuses {
+  [index: number]: Status;
+}
+export interface Status {
+  details: string;
+  errorCode: number | string;
+  moreInfo: string;
+}

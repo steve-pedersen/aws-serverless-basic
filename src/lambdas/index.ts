@@ -61,13 +61,14 @@ export const handler = async (event: Event, context: Context) => {
     logger.info(`*** event received[${local}] ***`, { url: path });
 
     const { statusCode, result } = await server.inject(serverOptions);
+    console.log('HERE WE GOOOOOO', statusCode, result);
     const responseBody = JSON.stringify(result);
     responseHeaders[CORRELATION_ID] = correlationId || '';
 
     return { headers: responseHeaders, body: responseBody, statusCode };
   } catch (err) {
     const { message } = err as Error;
-    logger.info(`Error: ${message}`, { err });
+    logger.error(`Error: ${message}`, { err });
 
     return {
       statusCode: 500,

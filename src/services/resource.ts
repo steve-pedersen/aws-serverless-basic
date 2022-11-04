@@ -23,7 +23,7 @@ class ResourceService extends DatabaseService {
     super(request);
     this.query = request.pre?.query;
     this.payload = request.pre?.payload;
-    this.params = request.pre?.params;
+    this.params = request.params;
     this.input = request.pre?.input;
   }
 
@@ -67,7 +67,7 @@ class ResourceService extends DatabaseService {
       const err = '';
       if (err) reject(err);
 
-      const payload = this.parseResults([this.input?.params || 'resource1']);
+      const payload = this.parseResults([this.params || 'resource1']);
       resolve({ payload, code: 200 });
     });
   }

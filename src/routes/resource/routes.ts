@@ -1,7 +1,7 @@
 import { Request, ServerRoute } from '@hapi/hapi';
-import Joi from '@hapi/joi';
-import { getResourceByIdRequestSchema, getResourceResponseSchema } from './schemas';
+import { errorResponseSchema, getResourceByIdRequestSchema } from './schemas';
 import { ResourceController } from '../../controllers/resource';
+import ExceptionHandler from '../../errors/exceptionHandler';
 
 /**
  * Pre method (middleware) example
@@ -14,6 +14,12 @@ const transformInput = (request: Request) => {
   };
 };
 
+const storeCorrelationId = (request: Request) => {
+  console.log('STORING CORRELATION ID IN PRE METHOD', request.params, request.paramsArray);
+
+  return request.headers['s37-correlation-id'];
+};
+
 export default [
   {
     method: 'GET',
@@ -22,7 +28,10 @@ export default [
       tags: ['api', 'languages'],
       description: 'GET a collection of resources',
       notes: 'Demos using "pre" to transform the inputs and assign to a variable "input"',
-      pre: [{ method: transformInput, assign: 'input' }],
+      pre: [
+        { method: storeCorrelationId, assign: 'correlationId' },
+        { method: transformInput, assign: 'input' },
+      ],
     },
     handler: async (request: Request, h: any) => {
       request.server.log('info', `GET request on /api/v1/resources`);
@@ -40,23 +49,28 @@ export default [
       tags: ['api', 'languages'],
       description: 'GET a single resource by id',
       notes: 'Demos using Joi for request & response validation',
+      pre: [{ method: storeCorrelationId, assign: 'correlationId' }],
       validate: {
-        query: getResourceByIdRequestSchema,
+        params: getResourceByIdRequestSchema,
         options: {
           abortEarly: false,
           presense: 'optional',
           allowUnknown: true,
         },
         failAction: async (request: Request, h: any, err: any) => {
-          request.log('error', err);
-          console.log('invalid request, missing resource id', request);
+          request.server.log('error', err);
+          const id = request.params?.id || 'unknown';
+          const exception = new ExceptionHandler(request);
+          const { code, payload } = exception.handleHttpBadRequest(`Invalid id parameter: ${id}`);
+
+          return h.response(payload).code(code).takeover();
         },
       },
       response: {
         status: {
-          200: getResourceResponseSchema,
-          400: Joi.any(),
-          401: Joi.any(),
+          // 200: getResourceResponseSchema,
+          400: errorResponseSchema,
+          401: errorResponseSchema,
         },
       },
     },
