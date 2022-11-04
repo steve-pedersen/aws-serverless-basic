@@ -35579,6 +35579,8 @@ var getResourceResponseSchema = import_joi.default.object({
 
 // src/controllers/base.ts
 var BaseController = class {
+  request;
+  corellationId;
   constructor(request) {
     this.request = request;
     this.corellationId = request.headers["s37-correlation-id"] || request.correlationId;
@@ -35593,6 +35595,9 @@ var BaseController = class {
 
 // src/controllers/resource.ts
 var ResourceController = class extends BaseController {
+  query;
+  params;
+  payload;
   constructor(request) {
     var _a, _b, _c;
     super(request);
@@ -35741,7 +35746,7 @@ var handler = async (event, context) => {
   try {
     console.log(`*** event received[${local}] ***`, { url: path });
     logger.info(`*** event received[${local}] ***`, { url: path });
-    const { statusCode, result } = await server2.inject(options);
+    const statusCode = 200, result = { string: "cheese" };
     const responseBody = JSON.stringify(result);
     responseHeaders[CORRELATION_ID] = correlationId || "";
     return { headers: responseHeaders, body: responseBody, statusCode };

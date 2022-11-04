@@ -2,7 +2,7 @@ service: aws-serverless-basic
 
 package:
   individually: true
-  
+
 custom:
   stage: ${opt:stage, self:provider.stage}
   deploymentBucket:
@@ -73,7 +73,7 @@ provider:
         - Effect: Allow
           Action:
             - dynamodb:*
-          Resource: "*"
+          Resource: '*'
         - Effect: Allow
           Action:
             - ssm:GetParameter
@@ -103,14 +103,16 @@ provider:
                   - Ref: 'AWS::AccountId'
                   - 'parameter/${self:provider.stage}/platform/global/aurora/master/password'
             - 'Fn::Join':
-              - ':'
-              - - 'arn:aws:iam:'
-                - Ref: 'AWS::AccountId'
-                - 'policy/${self:provider.stage}-catalog-db-read-access'
+                - ':'
+                - - 'arn:aws:iam:'
+                  - Ref: 'AWS::AccountId'
+                  - 'policy/${self:provider.stage}-catalog-db-read-access'
 
 plugins:
-  - serverless-offline
+  - serverless-plugin-typescript
   - serverless-esbuild
+  - serverless-secrets-plugin
+  - serverless-offline
 
 layers:
   dependencies:

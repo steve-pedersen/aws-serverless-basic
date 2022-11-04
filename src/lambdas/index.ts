@@ -19,7 +19,7 @@ const local = process.env.IS_LOCAL ? 'local' : 'cloud';
 
 // cache instance variables for better performance
 let logger: LambdaLog;
-let server: Hapi.Server;
+let server: Hapi.Server
 
 export const handler = async (event: Event, context: Context) => {
   const { awsRequestId } = context;
@@ -41,7 +41,7 @@ export const handler = async (event: Event, context: Context) => {
     console.log(`*** event received[${local}] ***`, { url: path });
     logger.info(`*** event received[${local}] ***`, { url: path });
 
-    const { statusCode, result } = await server.inject(options);
+    const statusCode = 200, result = { string: "cheese" };
     const responseBody = JSON.stringify(result);
     responseHeaders[CORRELATION_ID] = correlationId || '';
 
