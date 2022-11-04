@@ -142,10 +142,7 @@
     {
       "Sid": "VisualEditor5",
       "Effect": "Allow",
-      "Action": [
-        "cloudformation:CreateUploadBucket",
-        "cloudformation:Describe*"
-      ],
+      "Action": ["cloudformation:CreateUploadBucket", "cloudformation:Describe*"],
       "Resource": "arn:aws:cloudformation:eu-central-1:*:stack/aws-serverless-basic-*/*"
     },
     {

@@ -11,7 +11,9 @@ class ExceptionHandler {
   request: HapiRequest;
 
   constructor(request: HapiRequest) {
-    this.correlationId = request.headers['s37-correlation-id'] || request.pre?.correlationId;
+    const { headers = {}, pre = {} } = request || {};
+    const { correlationId = '' } = pre;
+    this.correlationId = headers['s37-correlation-id'] || correlationId;
     this.request = request;
   }
 

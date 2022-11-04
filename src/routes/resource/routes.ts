@@ -15,7 +15,9 @@ const transformInput = (request: Request) => {
 };
 
 const storeCorrelationId = (request: Request) => {
-  return request.headers['s37-correlation-id'];
+  const { headers = {} } = request || {};
+  
+  return headers['s37-correlation-id'] || '';
 };
 
 export default [
@@ -56,8 +58,8 @@ export default [
           allowUnknown: true,
         },
         failAction: async (request: Request, h: any, err: any) => {
-          request.server.log('error', err);
-          const id = request.params?.id || 'unknown';
+          const { params = {} } = request || {};
+          const { id = 'unknown' } = params;
           const exception = new ExceptionHandler(request);
           const { code, payload } = exception.handleHttpBadRequest(`Invalid id parameter: ${id}`);
 

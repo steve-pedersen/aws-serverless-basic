@@ -1,10 +1,10 @@
 import * as Hapi from '@hapi/hapi';
 // import { LambdaLog } from 'lambda-log';
 import { Logger } from '@aws-lambda-powertools/logger';
-import { Event, Context } from '../lib/types';
 import { initializeServer } from '../utils/server';
 import { createLogger } from '../utils/logger';
 import { buildFullUrl } from '../utils';
+import { Context, APIGatewayProxyResult, APIGatewayEvent } from 'aws-lambda';
 
 const CORS_KEY = 'access-control-allow-origin';
 const CONTENT_TYPE = 'content-type';
@@ -16,13 +16,13 @@ const responseHeaders = {
   [CORRELATION_ID]: '',
 };
 
-const local = process.env.IS_LOCAL ? 'local' : 'cloud';
+const local = process.env['IS_LOCAL'] ? 'local' : 'cloud';
 
 // cache instance variables for better performance
 let logger: Logger;
 let server: Hapi.Server;
 
-export const handler = async (event: Event, context: Context) => {
+export const handler = async (event: APIGatewayEvent, context: Context): Promise<APIGatewayProxyResult> => {
   const { httpMethod, path, queryStringParameters, body, headers } = event;
   // map lambda event to Hapi request
   const serverOptions = {
@@ -48,11 +48,11 @@ export const handler = async (event: Event, context: Context) => {
   server.events.on('log', (event: Hapi.LogEvent, tags: { [key: string]: true }) => {
     const { data } = event;
 
-    if (tags.error) {
+    if (tags['error']) {
       logger.error(`Request ${event.request} error: ${data || 'unknown'}`);
     }
 
-    if (tags.info) {
+    if (tags['info']) {
       logger.info(`Request ${event.request} info: ${data || 'unknown'}`);
     }
   });

@@ -27,33 +27,33 @@ Serverless (with a capital S) is an open source development framework which does
 1. Clone repository
 1. Run `yarn install`
 1. Update project name in `serverless.yml` and create a layer for node dependencies
-    1. Run `yarn install-layer` to package up dependency layer
-1. Update `serverless.yml` to reference your own api key stored in Parameter Store (SSM). 
-    1. For key value, you should generate a new UUID
-    1. For key name, construct it with the appName
+   1. Run `yarn install-layer` to package up dependency layer
+1. Update `serverless.yml` to reference your own api key stored in Parameter Store (SSM).
+   1. For key value, you should generate a new UUID
+   1. For key name, construct it with the appName
 1. Replace `aws-serverless-basic` with project name in `aws-iam-policy.json`
 1. Replace `dev1-eu-de` with desired region in `aws-iam-policy.json`
 1. Create AWS IAM policy from `aws-iam-policy`
 1. Setup local aws credentials with policy access
-    1. Navigate to your user's home directory on your computer (for example `/Users/johndoe/`)
-    1. Create a `.aws` folder if it does not already exist
-    1. Navigate into your new `.aws` folder
-    1. Create a file called `credentials`
-    1. Open your new `credentials` file
-    1. Include your access and secret key within the file like the below
-        1.  ```
-            [default]
-            region = us-west-2
-            aws_access_key_id = accessKeyHere
-            aws_secret_access_key = secretKeyHere
-            ```
+   1. Navigate to your user's home directory on your computer (for example `/Users/johndoe/`)
+   1. Create a `.aws` folder if it does not already exist
+   1. Navigate into your new `.aws` folder
+   1. Create a file called `credentials`
+   1. Open your new `credentials` file
+   1. Include your access and secret key within the file like the below
+      1. ```
+         [default]
+         region = us-west-2
+         aws_access_key_id = accessKeyHere
+         aws_secret_access_key = secretKeyHere
+         ```
 1. Execute decrypt command based on the environment you want to deploy to
-    1. `yarn decrypt --stage <env> --password secret_password`
-        1. Example: `yarn decrypt --stage dev --password secret_password`
+   1. `yarn decrypt --stage <env> --password secret_password`
+      1. Example: `yarn decrypt --stage dev --password secret_password`
 1. To run offline use `sls offline -s <stage_name>`
-    1. Example: `sls offline -s dev1-eu-de`
+   1. Example: `sls offline -s dev1-eu-de`
 1. Deploy with `sls deploy -s <stage_name>`
-    1. Example: `sls deploy -s dev1-eu-de`
+   1. Example: `sls deploy -s dev1-eu-de`
 
 ## Code Configuration Notes
 
@@ -92,4 +92,5 @@ We utilize a plugin called [Serverless Offline](https://github.com/dherault/serv
 A single serverless command is used to remove every AWS resource provisioned in the project:
 
 - `serverless remove`
+
 ## aws-reference-sys-api-poc
