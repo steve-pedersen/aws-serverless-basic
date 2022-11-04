@@ -15,9 +15,8 @@ const transformInput = (request: Request) => {
 };
 
 const storeCorrelationId = (request: Request) => {
-  const { params = {}, paramsArray = [], headers = {} } = request || {};
-  console.log('STORING CORRELATION ID IN PRE METHOD', params, paramsArray);
-
+  const { headers = {} } = request || {};
+  
   return headers['s37-correlation-id'] || '';
 };
 
@@ -35,8 +34,6 @@ export default [
       ],
     },
     handler: async (request: Request, h: any) => {
-      request.server.log('info', `GET request on /api/v1/resources`);
-
       const controller = new ResourceController(request);
       const { code, payload } = await controller.getResources();
 
@@ -59,10 +56,8 @@ export default [
           allowUnknown: true,
         },
         failAction: async (request: Request, h: any, err: any) => {
-          request.server.log('error', err);
           const { params = {} } = request || {};
           const { id = 'unknown' } = params;
-          // const id = request.params?.id || 'unknown';
           const exception = new ExceptionHandler(request);
           const { code, payload } = exception.handleHttpBadRequest(`Invalid id parameter: ${id}`);
 
