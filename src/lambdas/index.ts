@@ -1,9 +1,9 @@
 import * as Hapi from '@hapi/hapi';
 import { LambdaLog } from 'lambda-log';
-import { Event, Context } from '../lib/types';
 import { initializeServer } from '../utils/server';
 import { createLogger } from '../utils/logger';
 import { buildFullUrl } from '../utils';
+import { Context, APIGatewayProxyResult, APIGatewayEvent } from 'aws-lambda';
 
 const CORS_KEY = 'access-control-allow-origin';
 const CONTENT_TYPE = 'content-type';
@@ -15,13 +15,13 @@ const responseHeaders = {
   [CORRELATION_ID]: '',
 };
 
-const local = process.env.IS_LOCAL ? 'local' : 'cloud';
+const local = process.env['IS_LOCAL'] ? 'local' : 'cloud';
 
 // cache instance variables for better performance
 let logger: LambdaLog;
 let server: Hapi.Server;
 
-export const handler = async (event: Event, context: Context) => {
+export const handler = async (event: APIGatewayEvent, context: Context): Promise<APIGatewayProxyResult> => {
   const { awsRequestId } = context;
   const { httpMethod, path, queryStringParameters, body, headers } = event;
   const correlationId = headers[CORRELATION_ID];

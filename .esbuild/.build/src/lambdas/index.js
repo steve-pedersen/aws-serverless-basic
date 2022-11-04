@@ -1,3 +1,4 @@
+"use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -35727,7 +35728,7 @@ var responseHeaders = {
   [CONTENT_TYPE]: "application/json",
   [CORRELATION_ID]: ""
 };
-var local = process.env.IS_LOCAL ? "local" : "cloud";
+var local = process.env["IS_LOCAL"] ? "local" : "cloud";
 var logger;
 var server2;
 var handler = async (event, context) => {

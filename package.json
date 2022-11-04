@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.108",
     "@types/hapi": "^18.0.7",
     "@types/hapi__hapi": "^20.0.13",
     "@types/hapi__joi": "^17.1.8",
