@@ -15,8 +15,6 @@ const transformInput = (request: Request) => {
 };
 
 const storeCorrelationId = (request: Request) => {
-  console.log('STORING CORRELATION ID IN PRE METHOD', request.params, request.paramsArray);
-
   return request.headers['s37-correlation-id'];
 };
 

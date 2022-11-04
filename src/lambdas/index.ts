@@ -61,7 +61,6 @@ export const handler = async (event: Event, context: Context) => {
     logger.info(`*** event received[${local}] ***`, { url: path });
 
     const { statusCode, result } = await server.inject(serverOptions);
-    console.log('HERE WE GOOOOOO', statusCode, result);
     const responseBody = JSON.stringify(result);
     responseHeaders[CORRELATION_ID] = correlationId || '';
 

@@ -111,9 +111,9 @@ class ExceptionHandler {
     return this.buildResponse(error);
   }
 
-  // handleMethodArgumentNotValid(message: string, details: string = '400 Conflict'): ErrorResponse {}
-  // handleMethodArgumentTypeMismatch(message: string, details: string = '400 Conflict'): ErrorResponse {}
-  // handleConstraintViolation(message: string, details: string = '400 Conflict'): ErrorResponse {}
+  // handleMethodArgumentNotValid(message: string, details: string = '400 Bad Request'): ErrorResponse {}
+  // handleMethodArgumentTypeMismatch(message: string, details: string = '400 Bad Request'): ErrorResponse {}
+  // handleConstraintViolation(message: string, details: string = '400 Bad Request'): ErrorResponse {}
 
   /**
    * Constructs the response
