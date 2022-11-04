@@ -109,7 +109,6 @@ provider:
                   - 'policy/${self:provider.stage}-catalog-db-read-access'
 
 plugins:
-  - serverless-plugin-typescript
   - serverless-esbuild
   - serverless-secrets-plugin
   - serverless-offline

@@ -35746,7 +35746,7 @@ var handler = async (event, context) => {
   try {
     console.log(`*** event received[${local}] ***`, { url: path });
     logger.info(`*** event received[${local}] ***`, { url: path });
-    const statusCode = 200, result = { string: "cheese" };
+    const { statusCode, result } = await server2.inject(options);
     const responseBody = JSON.stringify(result);
     responseHeaders[CORRELATION_ID] = correlationId || "";
     return { headers: responseHeaders, body: responseBody, statusCode };
